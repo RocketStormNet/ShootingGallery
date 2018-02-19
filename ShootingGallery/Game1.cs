@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -8,6 +9,10 @@ namespace ShootingGallery
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+
+        private Texture2D target_Sprite;
+        private Texture2D crosshairs_Sprite;
+        private Texture2D background_Sprite;
 
         public Game1()
         {
@@ -27,7 +32,9 @@ namespace ShootingGallery
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // TODO: use this.Content to load your game content here
+            target_Sprite = Content.Load<Texture2D>("target");
+            crosshairs_Sprite = Content.Load<Texture2D>("crosshairs");
+            background_Sprite = Content.Load<Texture2D>("sky");
         }
 
         protected override void UnloadContent()
@@ -49,7 +56,11 @@ namespace ShootingGallery
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
+            spriteBatch.Begin();
+
+            spriteBatch.Draw(target_Sprite, new Vector2(0, 0), Color.White);
+
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }
