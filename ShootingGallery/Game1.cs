@@ -14,6 +14,12 @@ namespace ShootingGallery
         private Texture2D crosshairs_Sprite;
         private Texture2D background_Sprite;
 
+        private SpriteFont gameFont;
+
+        Vector2 targetPosition = new Vector2(300, 300);
+
+        private const int TARGET_RADIUS = 45;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -35,6 +41,8 @@ namespace ShootingGallery
             target_Sprite = Content.Load<Texture2D>("target");
             crosshairs_Sprite = Content.Load<Texture2D>("crosshairs");
             background_Sprite = Content.Load<Texture2D>("sky");
+
+            gameFont = Content.Load<SpriteFont>("galleryFont");
         }
 
         protected override void UnloadContent()
@@ -59,7 +67,9 @@ namespace ShootingGallery
             spriteBatch.Begin();
 
             spriteBatch.Draw(background_Sprite, new Vector2(0, 0), Color.White);
-            spriteBatch.Draw(target_Sprite, new Vector2(0, 0), Color.White);
+            spriteBatch.Draw(target_Sprite, targetPosition, Color.White);
+
+            spriteBatch.DrawString(gameFont, "Test Message", new Vector2(100, 100), Color.White);
 
             spriteBatch.End();
 
