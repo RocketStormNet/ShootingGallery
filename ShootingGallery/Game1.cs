@@ -23,6 +23,7 @@ namespace ShootingGallery
         private bool mReleased = true;
 
         private int score = 0;
+        private float mouseTargetDist;
 
         public Game1()
         {
@@ -63,9 +64,15 @@ namespace ShootingGallery
 
             mState = Mouse.GetState();
 
+            mouseTargetDist = Vector2.Distance(targetPosition, new Vector2(mState.X, mState.Y));
+
             if (mState.LeftButton == ButtonState.Pressed && mReleased == true)
             {
-                score++;
+                if (mouseTargetDist < TARGET_RADIUS)
+                {
+                    score++;
+                }
+
                 mReleased = false;
             }
 
@@ -84,7 +91,7 @@ namespace ShootingGallery
             spriteBatch.Begin();
 
             spriteBatch.Draw(background_Sprite, new Vector2(0, 0), Color.White);
-            spriteBatch.Draw(target_Sprite, targetPosition, Color.White);
+            spriteBatch.Draw(target_Sprite, new Vector2(targetPosition.X - TARGET_RADIUS, targetPosition.Y - TARGET_RADIUS), Color.White);
 
             spriteBatch.DrawString(gameFont, score.ToString(), new Vector2(100, 100), Color.White);
 
