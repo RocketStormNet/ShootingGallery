@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 
 namespace ShootingGallery
 {
@@ -71,6 +72,11 @@ namespace ShootingGallery
                 if (mouseTargetDist < TARGET_RADIUS)
                 {
                     score++;
+
+                    Random rand = new Random();
+
+                    targetPosition.X = rand.Next(TARGET_RADIUS, graphics.PreferredBackBufferWidth - TARGET_RADIUS + 1);
+                    targetPosition.Y = rand.Next(TARGET_RADIUS, graphics.PreferredBackBufferHeight - TARGET_RADIUS + 1);
                 }
 
                 mReleased = false;
